@@ -1,0 +1,58 @@
+# config/config.yml
+
+# ================= 全局默认设置 =================
+globalDefaults:
+  lowCommentNum: 0
+  lowWorthyNum: 0
+  filterWords:
+    - "过期"
+    - "售罄"
+    - "京喜" # 添加了京喜
+    - "二手"
+
+# ================= 详细关键词配置 =================
+keywords:
+  - keyword: ""
+    lowCommentNum: 20
+  # 1. 最简单的配置：只写关键词，使用全局默认设置
+  - keyword: "ET666"
+
+  # 2. 正则表达式，并覆盖默认设置
+  - keyword: 're:(?i)(小米|格力|美的|Mi|GREE|Midea).*?空调.*?\d+\.?\d*匹'
+    lowCommentNum: 10    # 这个词要求更高的评论数
+    lowWorthyNum: 20     # 要求更高的值数
+    # 私有过滤词：会与全局过滤词合并
+    filterWords:
+      - "单冷"
+      - "三级能效"
+
+  # 3. 增加价格范围限制
+  - keyword: "N8HE"
+    minPrice: 1500.0  # 最低价
+    maxPrice: 2500.0  # 最高价
+    lowCommentNum: 1  # 可以降低要求
+    lowWorthyNum: 6
+
+  # 4. 复杂正则和价格，同时提高热度要求
+  - keyword: "re:.*鸡蛋.*枚.*"
+    minPrice: 10.0
+    maxPrice: 50.0
+    lowCommentNum: 5    # 鸡蛋文章，评论数一般不高，放宽
+    lowWorthyNum: 10
+
+  # 5. 其他关键词
+  - keyword: "立白茶籽"
+    lowCommentNum: 5
+  - keyword: "心相印抽纸"
+    lowCommentNum: 50 # 抽纸要很火才推送
+ 
+#  - keyword: "灯"
+#    minPrice: 10.0  # 最低价
+#    maxPrice: 2500.0  # 最高价
+
+# ================= 其他应用配置 =================
+satisfyNum: 50 # 满足多少个商品停止搜索 (现在是全局的)
+tickTime: 300 # 5分钟执行一次，防止频繁请求被封，或根据自己需求调整
+
+telegramBotToken: "8229103765:AAFxe1h_zm0yKPFHWFJgiK_039Uw4svLoqE" # 从 @BotFather 获取，请替换！
+telegramChatId: "1127994288"    # 个人 chat id 或 群 id（群通常为 -100...），请替换！
